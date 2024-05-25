@@ -1,6 +1,6 @@
 import React from 'react';
-import './services.css';
-import serviceImage from '../assets/green-massagebed.jpg';
+import './Services.css';
+//import serviceImage from '../assets/green-massagebed.jpg';
 import Navbar from './Navbar';
 import contactimage from '../assets/huepink.jpg'
 

@@ -1,34 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Home from './components/Home'
+//import Landing from './components/Landing';
+import './index.css';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Link,
+} from "react-router-dom";
+//import Services from './components/Services';
+import Services from './components/Booking';
+import Contact from './components/Contact';
+import Blogs from './components/Blogs'
+//import Payment from './components/Payment';
+import ServicesComponent from './components/Services';
+import SubscribeForm from './components/Forms'
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home/>,
+  },
+  {
+    path: '/booking',
+    element: < Services/>,
+  },
+  {
+    path: 'contact',
+    element: <Contact/>
+  },
+  {
+    path: '/blogs',
+    element: <Blogs/>
+  },
+  {
+    path: '/services',
+    element: <ServicesComponent/>
+  },
+  //{
+    //path:'/payment',
+    //element: <Payment/>
+  //},
+  {
+    path: '/form',
+    element: <SubscribeForm/>
+  }
+]);
+
+/*createRoot(document.getElementById("root")).render(
+  <RouterProvider router={router} />
+);*/
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className='App'>
+      <RouterProvider router={router}/>
+    </div>
   )
 }
 

@@ -10,10 +10,10 @@ import prenatal from '../assets/prenatal.jpg'
 import cupping from '../assets/cupping.jpg'
 import hotstone from '../assets/hotstone.jpg'
 import Navbar from './Navbar'
-import contactimage from '../assets/huepink.jpg'
+//import contactimage from '../assets/huepink.jpg'
 import { Link, useNavigate,  } from "react-router-dom";
 import { usePaystackPayment } from 'react-paystack';
-import './booking.css';
+import './Booking.css';
 
 function Booking() {
     const [selectedServices, setSelectedServices] = useState([])

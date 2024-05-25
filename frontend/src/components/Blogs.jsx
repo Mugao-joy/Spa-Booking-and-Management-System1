@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './blogs.css'
+import './Blogs.css'
 import Navbar from './Navbar';
 
 const Blog = () => {
@@ -8,7 +8,7 @@ const Blog = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await fetch('https://booking-management-system.onrender.com/api/blogs')
+        const response = await fetch('http://127.0.0.1:8000/api/blogs/')
         if (!response.ok) {
           throw new Error('Failed to fetch blogs')
         }
