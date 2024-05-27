@@ -11,20 +11,21 @@
 }
 
 .social-section a {
-    color: #fff; /* White icons */
+    color: #89735C;
     transition: color 0.3s ease-in-out;
 }
 
 .social-section a:hover {
-    color: #d7ccc8; /* Light brown on hover */
+    color: #d7ccc8;
 }
 
 .text-reset {
     color: #fff;
+    text-align: left;
 }
 
 .text-reset:hover {
-    color: #d7ccc8; /* Light brown on hover */
+    color: #d7ccc8;
 }
 
 h6.text-uppercase {

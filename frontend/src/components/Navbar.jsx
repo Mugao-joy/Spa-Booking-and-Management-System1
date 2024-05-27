@@ -14,7 +14,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="p-4 fixed w-full z-10 top-0" style={{ backgroundColor: '#89735C' }}>
+        <nav className=" nav p-4 fixed w-full z-10 top-0" style={{ backgroundColor: '#89735C' }}>
             <div className="container mx-auto flex justify-between items-center">
                 <div>
                     <img src={logo} alt="Logo" className="w-12 h-12 mr-4" />

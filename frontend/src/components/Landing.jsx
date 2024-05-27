@@ -82,7 +82,7 @@ const Landing = () => {
                 )}
                 <h1 className={isMobile ? 'text-4xl' : 'lg:text-6xl md:text-4xl text-2xl font-semibold mb-4'}>Indulge in Tranquility</h1>
                 <p className={isMobile ? 'text-lg p-3' : 'mb-6 lg:p-5'}>Discover our opulent oasis of relaxation</p>
-                <a href="/booking" className="bg-pink-500 hover:bg-pink-600 text-white py-2 px-6 rounded-full text-lg hover:transition duration-300 ease-in-out">Book A Visit</a>
+                <a href="/booking" className=" hover:bg-pink-600 text-white py-2 px-6 rounded-full text-lg hover:transition duration-300 ease-in-out"style={{ backgroundColor: '#A2A384' }}>Book A Visit</a>
 
             </div>
 

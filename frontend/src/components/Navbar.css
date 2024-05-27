@@ -38,23 +38,23 @@
   }
   
   nav a {
-    color: #f9fafb; /* White color for links */
+    color: #f9fafb; /*links */
     text-decoration: none;
     transition: color 0.3s ease;
   }
   
   nav a:hover {
-    color: #82835A; /* Light gray on hover */
+    color: #82835A;
   }
   
   .menu-button {
-    display: none; /* Initially hidden */
+    display: none;
   }
   
   .menu-button svg {
     height: 24px;
     width: 24px;
-    color: #f9fafb; /* White color for the menu button */
+    color: #f9fafb;
   }
   @media only screen and (min-width: 1024px) {
   }
