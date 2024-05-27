@@ -1,5 +1,7 @@
 import Home from './components/Home'
 //import Landing from './components/Landing';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import './index.css';
 import {
   createBrowserRouter,

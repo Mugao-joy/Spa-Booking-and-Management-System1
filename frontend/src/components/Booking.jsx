@@ -9,6 +9,7 @@ import CPeel from '../assets/dermabrasion.jpg'
 import prenatal from '../assets/prenatal.jpg'
 import cupping from '../assets/cupping.jpg'
 import hotstone from '../assets/hotstone.jpg'
+import facial2 from '../assets/facial2.jpg'
 import Navbar from './Navbar'
 //import contactimage from '../assets/huepink.jpg'
 import { Link, useNavigate,  } from "react-router-dom";
@@ -40,7 +41,7 @@ function Booking() {
 
     const config = {
         reference: (new Date()).getTime().toString(),
-        email: "user@example.com",
+        email: "payments@bowana.com",
         amount: totalPrice * 100, // Amount is in kobo (lowest currency unit), so multiply by 100 to convert to kobo
         publicKey: 'pk_test_fff5ca05942db65879579d4477b6b0c835c99826',
         currency: 'KES'
@@ -160,7 +161,7 @@ function Booking() {
                         </div>
                         <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
                             <a className="block relative h-48 rounded overflow-hidden">
-                                <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://dummyimage.com/427x267" />
+                                <img alt="ecommerce" className="object-cover object-center w-full h-full block" src={facial2} />
                             </a>
                             <div className="mt-4">
                                 <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">Waxing Hair Removal</h3>
@@ -173,7 +174,7 @@ function Booking() {
                         </div>
                         <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
                             <a className="block relative h-48 rounded overflow-hidden">
-                                <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://dummyimage.com/428x268" />
+                                <img alt="ecommerce" className="object-cover object-center w-full h-full block" src={LED} />
                             </a>
                             <div className="mt-4">
                                 <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">Waxing Hair Removal</h3>
