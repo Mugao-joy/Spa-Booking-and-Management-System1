@@ -19,7 +19,7 @@ function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    emailjs.sendForm('service_jhay48f', 'template_c2xlabi',formData,{publicKey: 'nLAv_Dh9dVlpHnNUK'})
+    emailjs.sendForm('service_k0geb9b', 'template_c2xlabi',formData,{publicKey: 'nLAv_Dh9dVlpHnNUK'})
       .then((result) => {
         console.log('Email sent successfully!', result.text)
         setSuccessMessage('Email sent successfully!')

@@ -11,15 +11,23 @@ import cupping from '../assets/cupping.jpg'
 import hotstone from '../assets/hotstone.jpg'
 import facial2 from '../assets/facial2.jpg'
 import Navbar from './Navbar'
+import Modal from 'react-modal'
 //import contactimage from '../assets/huepink.jpg'
 import { Link, useNavigate,  } from "react-router-dom";
 import { usePaystackPayment } from 'react-paystack';
 import './Booking.css';
 
+Modal.setAppElement('#root');
+
 function Booking() {
     const [selectedServices, setSelectedServices] = useState([])
     const [totalPrice, setTotalPrice] = useState(0)
     const [paymentCompleted, setPaymentCompleted] = useState(false) //track payment completion
+    const [email, setEmail] = useState("")
+    const [name, setName] = useState("")
+    const [phone, setPhone] = useState("")
+    //const [showPaymentForm, setShowPaymentForm] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const navigate = useNavigate()
 
     const handleCheckbox = (service, price) => {
@@ -41,15 +49,21 @@ function Booking() {
 
     const config = {
         reference: (new Date()).getTime().toString(),
-        email: "payments@bowana.com",
+        email: email,
         amount: totalPrice * 100, // Amount is in kobo (lowest currency unit), so multiply by 100 to convert to kobo
         publicKey: 'pk_test_fff5ca05942db65879579d4477b6b0c835c99826',
-        currency: 'KES'
+        currency: 'KES',
+        metadata: {
+            name,
+            phone,
+        }
     };
 
-    const onSuccess = (reference) => {
-        console.log(reference);
+    const onSuccess = () => {
         setPaymentCompleted(true)//set payment completion to true
+        console.log(paymentCompleted)
+        setIsModalOpen(false)
+        window.location.href='https://calendly.com/bowana2019'
     };
 
     const onClose = () => {
@@ -62,16 +76,20 @@ function Booking() {
         if (selectedServices.length === 0){
             alert ('Select a Service to Proceed')
         } else {
-            initializePayment(onSuccess, onClose);
+            setIsModalOpen(true)
         }
     }
 
-    useEffect(() => {
-        if (paymentCompleted) {
-            navigate( 'https://calendly.com/bowana2019' )
+    const handlePayNow = () => {
+        if (email && name && phone) {
+            console.log('Initializing payment with config:', config);
+            initializePayment(onSuccess, onClose);
+        } else {
+            alert('Please fill in all the details.');
         }
-    }, [paymentCompleted])
+    }
 
+    
     return (
         <div style={{ backgroundColor: '#D5D6BD' }}>
             <div>
@@ -300,16 +318,70 @@ function Booking() {
                                 Apply Coupon
                             </button>
                         </div>
-                        <section id="payment" className="text-gray-600 body-font">
-                            <div className="container px-5 py-24 mx-auto">
-                                <button onClick={handleProceedToPayment} className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-                                Proceed to Payment
-                                </button>
-                            </div>
-                        </section>
+                        
                     </div>
                 </div>
             </section>
+            
+
+            <div className="flex justify-center mt-4">
+                <button onClick={handleProceedToPayment} className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                    Proceed to Payment
+                </button>
+            </div>
+
+            <Modal
+                isOpen={isModalOpen}
+                onRequestClose={() => setIsModalOpen(false)}
+                style={{
+                    overlay: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.75)',
+                    },
+                    content: {
+                        top: '50%',
+                        left: '50%',
+                        right: 'auto',
+                        bottom: 'auto',
+                        marginRight: '-50%',
+                        transform: 'translate(-50%, -50%)',
+                        padding: '40px',
+                        borderRadius: '10px',
+                        width: '400px',
+                    },
+                }}
+            >
+                <h2 className="text-2xl mb-4">Payment Details</h2>
+                <form>
+                    <label className="block mb-2">Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="w-full mb-4 p-2 border border-gray-300 rounded"
+                    />
+                    <label className="block mb-2">Email</label>
+                    <input
+                        type="text"
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="w-full mb-4 p-2 border border-gray-300 rounded"
+                    />
+                    <label className="block mb-2">Phone</label>
+                    <input
+                        type="text"
+                        id="phone"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        className="w-full mb-4 p-2 border border-gray-300 rounded"
+                    />
+                </form>
+                <button onClick={handlePayNow} className="w-full text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                    Pay Now
+                </button>
+            </Modal>
+                    
         </div>
     )
 }

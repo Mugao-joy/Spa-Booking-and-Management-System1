@@ -16,6 +16,7 @@
     "mdb-react-ui-kit": "^8.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-modal": "^3.16.1",
     "react-multi-carousel": "^2.8.5",
     "react-paystack": "^5.0.0",
     "react-responsive": "^10.0.0",
