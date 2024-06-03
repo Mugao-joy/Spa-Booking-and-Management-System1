@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 # Create your models here.
 
@@ -11,8 +12,11 @@ class Aesthetician(models.Model):
 
 class UserProfile(models.Model):
     name = models.CharField(max_length=100)
-    email = models.EmailField()
-    phone = models.CharField(max_length=15)
+    email = models.EmailField(unique=True)
+    subscribed_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.email
 
 class Service(models.Model):
     name = models.CharField(max_length=100)
