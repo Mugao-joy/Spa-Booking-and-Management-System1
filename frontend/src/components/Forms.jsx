@@ -93,7 +93,7 @@ const SubscribeForm = () => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SubscribeForm;
+export default SubscribeForm

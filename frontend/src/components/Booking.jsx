@@ -16,6 +16,7 @@ import Modal from 'react-modal'
 import { Link, useNavigate,  } from "react-router-dom";
 import { usePaystackPayment } from 'react-paystack';
 import './Booking.css';
+import { PopupWidget } from "react-calendly";
 
 Modal.setAppElement('#root');
 
@@ -28,7 +29,7 @@ function Booking() {
     const [phone, setPhone] = useState("")
     //const [showPaymentForm, setShowPaymentForm] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const navigate = useNavigate()
+    //const navigate = useNavigate()
 
     const handleCheckbox = (service, price) => {
         const index = selectedServices.indexOf(service)
@@ -51,7 +52,7 @@ function Booking() {
         reference: (new Date()).getTime().toString(),
         email: email,
         amount: totalPrice * 100, // Amount is in kobo (lowest currency unit), so multiply by 100 to convert to kobo
-        publicKey: 'pk_test_fff5ca05942db65879579d4477b6b0c835c99826',
+        publicKey: 'pk_live_3a31ece37db05b6f8bb00dd0fc1d01891fe58aae',
         currency: 'KES',
         metadata: {
             name,
@@ -61,13 +62,16 @@ function Booking() {
 
     const onSuccess = () => {
         setPaymentCompleted(true)//set payment completion to true
-        console.log(paymentCompleted)
+        //console.log(paymentCompleted)
         setIsModalOpen(false)
-        window.location.href='https://calendly.com/bowana2019'
-    };
+        
+        
+    }
 
     const onClose = () => {
         console.log('closed')
+        setIsModalOpen(false)
+        //window.location.href='https://calendly.com/bowana2019'
     }
 
     const initializePayment = usePaystackPayment(config);
@@ -105,9 +109,9 @@ function Booking() {
                             <div className="mt-4">
                                 <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">Facials</h3>
                                 <h2 className="text-gray-900 title-font text-lg font-medium">HydraFacial</h2>
-                                <p className="mt-1">5000 KES</p>
+                                <p className="mt-1">2 KES</p>
                                 <input type="checkbox" className="mr-2 leading-tight" checked={isServiceSelected('HydraFacial')}
-                                        onChange={() => handleCheckbox('HydraFacial', 5000)}/>
+                                        onChange={() => handleCheckbox('HydraFacial', 2)}/>
                                 <span className="text-sm">Check to select</span>
                                 {isServiceSelected('HydraFacial')}
                             </div>
@@ -301,9 +305,9 @@ function Booking() {
                             <div className="mt-4">
                                 <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">Laser Hair Removal</h3>
                                 <h2 className="text-gray-900 title-font text-lg font-medium">Legs Laser</h2>
-                                <p className="mt-1">25,000 KES/session</p>
+                                <p className="mt-1">2 KES/session</p>
                                 <input type="checkbox" className="mr-2 leading-tight" checked={isServiceSelected('Legs Laser')}
-                                        onChange={() => handleCheckbox('Legs Laser', 25000)}/>
+                                        onChange={() => handleCheckbox('Legs Laser', 2)}/>
                                 <span className="text-sm">Check to select</span>
                             </div>
                         </div>
@@ -324,7 +328,7 @@ function Booking() {
             </section>
             
 
-            <div className="flex justify-center mt-4">
+            <div id = 'payment' className="flex justify-center mt-4">
                 <button onClick={handleProceedToPayment} className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
                     Proceed to Payment
                 </button>
@@ -381,6 +385,15 @@ function Booking() {
                     Pay Now
                 </button>
             </Modal>
+            {paymentCompleted && (
+                <PopupWidget
+                    url="https://calendly.com/bowana2019"
+                    rootElement={document.getElementById("root")}
+                    text="Click here to schedule your appointment!"
+                    textColor="#ffffff"
+                    color="#00a2ff"
+                />
+            )}
                     
         </div>
     )

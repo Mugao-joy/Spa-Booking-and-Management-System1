@@ -5,10 +5,10 @@ import emailjs from '@emailjs/browser'
 
 function Contact() {
 
-  const form = useRef();
+  const form = useRef()
 
   const sendEmail = (e) => {
-    console.log(e)
+    //console.log(e)
     e.preventDefault();
 
     emailjs
@@ -17,13 +17,16 @@ function Contact() {
       })
       .then(
         () => {
-          console.log('SUCCESS!');
+          console.log('SUCCESS!')
+          setTimeout(() => {
+            window.location.reload()
+          }, 1000)
         },
         (error) => {
-          console.log('FAILED...', error.text);
+          console.log('FAILED...', error.text)
         },
-      );
-  };
+      )
+  }
   return (
     <div style={{ backgroundColor: '#D5D6BD' }}>
       <Navbar />
