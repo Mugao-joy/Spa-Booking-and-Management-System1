@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-#import dj_database_url
+import dj_database_url
 import os
 from pathlib import Path
 
@@ -80,11 +80,16 @@ WSGI_APPLICATION = 'bowanaProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# Get the DATABASE_URL environment variable
+DATABASE_URL = os.environ.get("DATABASE_URL", "postgres://booking_system_g9dj_user:aoruZec7TNCrlziVJoPeOjEX6yUsyF4q@dpg-col5udol5elc73dm2urg-a.oregon-postgres.render.com/booking_system_g9dj")
+
+# Ensure the DATABASE_URL is a string
+if isinstance(DATABASE_URL, bytes):
+    DATABASE_URL = DATABASE_URL.decode('utf-8')
+
+# Parse the DATABASE_URL and set up the default database
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    "default": dj_database_url.parse(DATABASE_URL)
 }
 
 
