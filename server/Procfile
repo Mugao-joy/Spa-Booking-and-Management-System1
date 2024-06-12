@@ -1,1 +1,1 @@
-web: gunicorn bowanaProject.wsgi --log-file -
+web: waitress-serve --port=$PORT bowanaProject.wsgi:application
