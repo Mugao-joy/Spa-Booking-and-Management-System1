@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-import dj_database_url
+#import dj_database_url
 import os
 from pathlib import Path
 
@@ -81,15 +81,15 @@ WSGI_APPLICATION = 'bowanaProject.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 
-DATABASE_URL = os.environ.get("DATABASE_URL", "postgres://booking_system_g9dj_user:aoruZec7TNCrlziVJoPeOjEX6yUsyF4q@dpg-col5udol5elc73dm2urg-a.oregon-postgres.render.com/booking_system_g9dj")
-
-
-if isinstance(DATABASE_URL, bytes):
-    DATABASE_URL = DATABASE_URL.decode('utf-8')
-
-
 DATABASES = {
-    "default": dj_database_url.parse(DATABASE_URL)
+    'default': {
+        'ENGINE':'django.db.backends.postgresql_psycopg2',
+        'NAME': 'booking_system_g9dj',
+        'USER':'booking_system_g9dj_user',
+        'PASSWORD':'aoruZec7TNCrlziVJoPeOjEX6yUsyF4q',
+        'HOST':'dpg-col5udol5elc73dm2urg-a.oregon-postgres.render.com',
+        'PORT':'5432',
+    }
 }
 
 
