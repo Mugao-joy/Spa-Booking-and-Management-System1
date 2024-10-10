@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from . import views
+from .views import register, login
 
 router = routers.DefaultRouter()
 router.register(r'aestheticians', views.AestheticianView, 'aesthetician')
@@ -15,4 +16,6 @@ urlpatterns = [
     path('myadmin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/userprofile/', views.UserProfile, name='userProfile'),
+    path('api/register/', register, name='register'),
+    path('api/login/', login, name='login'),
 ]

@@ -11,15 +11,20 @@ class Aesthetician(models.Model):
         return self.name
 
 class UserProfile(models.Model):
-    name = models.CharField(max_length=100)
+    username = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
+    password = models.CharField(max_length=128,null=True)
     subscribed_at = models.DateTimeField(default=timezone.now)
+
+    def set_password(self, raw_password): #hash password
+        from django.contrib.auth.hashers import make_password
+        self.password = make_password(raw_password)
 
     def __str__(self):
         return self.email
 
 class Service(models.Model):
-    name = models.CharField(max_length=100)
+    username = models.CharField(max_length=100)
     duration = models.IntegerField() # duration of service in mins/hrs???
     price = models.DecimalField(max_digits=10, decimal_places=2)
 

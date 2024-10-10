@@ -13,11 +13,11 @@ admin.site.register(Appointment, AppointmentAdmin)
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ('name', 'duration', 'price')
+    list_display = ('username', 'duration', 'price')
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email')
+    list_display = ('username', 'email')
 
 @admin.register(LoyaltyPoints)
 class LoyaltyPointsAdmin(admin.ModelAdmin):
