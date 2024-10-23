@@ -1,22 +1,18 @@
 from django.shortcuts import render
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
-from .Serializers import UserSerializer
 
-from rest_framework import viewsets
-from .Serializers import AestheticianSerializer, UserProfileSerializer, ServiceSerializer, AppointmentSerializer, LoyaltyPointsSerializer
-from .models import Aesthetician, UserProfile, Service, Appointment, LoyaltyPoints
+from rest_framework.response import Response
+
+
+#from .Serializers import AestheticianSerializer, ServiceSerializer, AppointmentSerializer, LoyaltyPointsSerializer
 
 from django.http import HttpResponse
-from rest_framework.authtoken.models import Token
-from rest_framework.authentication import authenticate
+
 
 def home(request):
     return HttpResponse("Welcome to the Booking Management System!")
 
 
-class AestheticianView(viewsets.ModelViewSet):
+"""class AestheticianView(viewsets.ModelViewSet):
     serializer_class = AestheticianSerializer
     queryset = Aesthetician.objects.all()
 
@@ -38,7 +34,7 @@ def register(request):
             user = serializer.save()
             user.set_password(request.data['password'])
             user.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response({"message" : "User registered successfully"},serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
@@ -66,3 +62,4 @@ class AppointmentView(viewsets.ModelViewSet):
 class LoyaltyPointsView(viewsets.ModelViewSet):
     serializer_class = LoyaltyPointsSerializer
     queryset = LoyaltyPoints.objects.all()
+"""
