@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.poetsen-one-regular {
+  font-family: "Poetsen One", sans-serif;
+  
+  font-style: normal;
+}
