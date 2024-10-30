@@ -1,0 +1,106 @@
+{
+  "hash": "e54bfa66",
+  "configHash": "cfc27ed5",
+  "lockfileHash": "c5d90792",
+  "browserHash": "abb63318",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "843405bd",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "d77ed1f4",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "ae7d231a",
+      "needsInterop": false
+    },
+    "@emailjs/browser": {
+      "src": "../../node_modules/@emailjs/browser/es/index.js",
+      "file": "@emailjs_browser.js",
+      "fileHash": "68f82b21",
+      "needsInterop": false
+    },
+    "react-multi-carousel": {
+      "src": "../../node_modules/react-multi-carousel/index.js",
+      "file": "react-multi-carousel.js",
+      "fileHash": "e508bdd4",
+      "needsInterop": true
+    },
+    "react-modal": {
+      "src": "../../node_modules/react-modal/lib/index.js",
+      "file": "react-modal.js",
+      "fileHash": "463ecf16",
+      "needsInterop": true
+    },
+    "react-paystack": {
+      "src": "../../node_modules/react-paystack/dist/index.es.js",
+      "file": "react-paystack.js",
+      "fileHash": "a784e55b",
+      "needsInterop": false
+    },
+    "react-calendly": {
+      "src": "../../node_modules/react-calendly/dist/index.es.js",
+      "file": "react-calendly.js",
+      "fileHash": "3543e52e",
+      "needsInterop": false
+    },
+    "react-responsive": {
+      "src": "../../node_modules/react-responsive/dist/esm/index.js",
+      "file": "react-responsive.js",
+      "fileHash": "39f25aa3",
+      "needsInterop": false
+    },
+    "react-slideshow-image": {
+      "src": "../../node_modules/react-slideshow-image/dist/react-slideshow-image.esm.js",
+      "file": "react-slideshow-image.js",
+      "fileHash": "bd7bfdb0",
+      "needsInterop": false
+    },
+    "react-spinners": {
+      "src": "../../node_modules/react-spinners/esm/index.js",
+      "file": "react-spinners.js",
+      "fileHash": "2ed63fb9",
+      "needsInterop": false
+    },
+    "@emotion/react": {
+      "src": "../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js",
+      "file": "@emotion_react.js",
+      "fileHash": "eb2865b7",
+      "needsInterop": false
+    },
+    "mdb-react-ui-kit": {
+      "src": "../../node_modules/mdb-react-ui-kit/dist/mdb-react-ui-kit.esm.js",
+      "file": "mdb-react-ui-kit.js",
+      "fileHash": "3e3c5723",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-NIBSDFOE": {
+      "file": "chunk-NIBSDFOE.js"
+    },
+    "chunk-CMK54ICT": {
+      "file": "chunk-CMK54ICT.js"
+    },
+    "chunk-GMV7INEJ": {
+      "file": "chunk-GMV7INEJ.js"
+    },
+    "chunk-WXSKVWTA": {
+      "file": "chunk-WXSKVWTA.js"
+    },
+    "chunk-4JI2AD7N": {
+      "file": "chunk-4JI2AD7N.js"
+    },
+    "chunk-CEQRFMJQ": {
+      "file": "chunk-CEQRFMJQ.js"
+    }
+  }
+}

@@ -18,7 +18,7 @@ import ServicesComponent from './components/Services';
 import SubscribeForm from './components/Forms'
 import Signup from './components/Signup';
 import Login from './components/Login';
-
+import Dashboard from './components/Context/Dashboard';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -44,10 +44,10 @@ const router = createBrowserRouter([
     path: '/services',
     element: <ServicesComponent/>
   },
-  //{
-    //path:'/payment',
-    //element: <Payment/>
-  //},
+  {
+    path:'/dashboard',
+    element: <Dashboard/>
+  },
   {
     path: '/form',
     element: <SubscribeForm/>

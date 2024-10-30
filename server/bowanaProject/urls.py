@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('bowanaApp.urls')),
     path('',include('blogs.urls')),
+    path('',include('appointments.urls')),
     
     path("auth/", include('djoser.urls.jwt')),
     path('auth/', include('djoser.urls')),

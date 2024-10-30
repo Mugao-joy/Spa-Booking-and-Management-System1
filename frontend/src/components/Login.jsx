@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './Context/Auth';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const { isLoggedIn, login } = useAuth()
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -25,7 +27,9 @@ const Login = () => {
 
             if (response.ok) {
                 // Redirect to a protected page or dashboard after successful login
-                navigate('/');
+                const data = await response.json();
+                login(data)
+                navigate('/dashboard'); //dashboard
             } else {
                 const data = await response.json();
                 setError('Login failed: ' + (data.detail || 'Invalid credentials'));
@@ -34,6 +38,16 @@ const Login = () => {
             setError('An error occurred during login.');
         }
     };
+
+    const SignupButton = () => {
+    const { isLoggedIn } = useAuth();
+
+    return (
+        <button onClick={isLoggedIn ? goToDashboard : handleSignup}>
+            {isLoggedIn ? 'Go to Dashboard' : 'Sign Up'}
+        </button>
+    );
+};
 
     return (
         <div className="flex justify-center items-center h-screen bg-gray-100">

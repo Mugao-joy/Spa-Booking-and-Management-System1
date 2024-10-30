@@ -60,11 +60,38 @@ function Booking() {
         }
     };
 
-    const onSuccess = () => {
+    const onSuccess = async () => {
         setPaymentCompleted(true)//set payment completion to true
         //console.log(paymentCompleted)
         setIsModalOpen(false)
         
+
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/appointments/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('access')}`,
+                },
+                body: JSON.stringify({
+                    username: name,
+                    services: selectedServices,
+                    appointment_date: new Date().toISOString(), // automatically set current date
+                    total_amount: totalPrice,
+                }),
+            });
+
+            if (response.ok) {
+                console.log("Appointment successfully saved.");
+                // Handle additional actions upon success, such as redirecting to dashboard
+            } else {
+                const errorData = await response.json();
+                console.error("Error saving appointment:", errorData);
+            }
+        } catch (error) {
+            console.error("Error connecting to backend:", error);
+        }
+    
         
     }
 
