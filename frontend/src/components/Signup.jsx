@@ -28,7 +28,7 @@ const Signup = () => {
     
             if (response.ok) {
                 // After successful signup, redirect to landing page
-                navigate('/');
+                navigate('/login');
             } else {
                 const data = await response.json();
                 setError(JSON.stringify(data)); // Display the actual error message

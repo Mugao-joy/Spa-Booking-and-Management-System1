@@ -13,112 +13,116 @@ import facial2 from '../assets/facial2.jpg'
 import Navbar from './Navbar'
 import Modal from 'react-modal'
 //import contactimage from '../assets/huepink.jpg'
-import { Link, useNavigate,  } from "react-router-dom";
+import { Link, Navigate, useNavigate,  } from "react-router-dom";
 import { usePaystackPayment } from 'react-paystack';
 import './Booking.css';
 import { PopupWidget } from "react-calendly";
+import { useAuth } from "./Context/Auth";
 
 Modal.setAppElement('#root');
 
 function Booking() {
-    const [selectedServices, setSelectedServices] = useState([])
-    const [totalPrice, setTotalPrice] = useState(0)
-    const [paymentCompleted, setPaymentCompleted] = useState(false) //track payment completion
-    const [email, setEmail] = useState("")
-    const [name, setName] = useState("")
-    const [phone, setPhone] = useState("")
-    //const [showPaymentForm, setShowPaymentForm] = useState(false)
+    const [selectedServices, setSelectedServices] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [paymentCompleted, setPaymentCompleted] = useState(false);
+    const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const [phone, setPhone] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
-    //const navigate = useNavigate()
+
+    const { user } = useAuth();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // Redirect to login if user is not authenticated
+        if (!user) {
+            navigate('/login');
+        }
+    }, [user, navigate]);
 
     const handleCheckbox = (service, price) => {
-        const index = selectedServices.indexOf(service)
-        if (index === -1){
-            setSelectedServices([...selectedServices, service])
-            setTotalPrice(totalPrice + price)
+        const index = selectedServices.indexOf(service);
+        if (index === -1) {
+            setSelectedServices([...selectedServices, service]);
+            setTotalPrice(totalPrice + price);
         } else {
-            const updatedServices = [...selectedServices]
-            updatedServices.splice(index, 1)
-            setSelectedServices(updatedServices)
-            setTotalPrice(totalPrice - price)
+            const updatedServices = [...selectedServices];
+            updatedServices.splice(index, 1);
+            setSelectedServices(updatedServices);
+            setTotalPrice(totalPrice - price);
         }
-    }
+    };
 
-    const isServiceSelected = (service) => {
-        return selectedServices.includes(service)
-    }
+    const isServiceSelected = (service) => selectedServices.includes(service);
 
     const config = {
         reference: (new Date()).getTime().toString(),
         email: email,
-        amount: totalPrice * 100, // Amount is in kobo (lowest currency unit), so multiply by 100 to convert to kobo
+        amount: totalPrice * 100, // Amount in smallest currency unit
         publicKey: 'pk_live_3a31ece37db05b6f8bb00dd0fc1d01891fe58aae',
         currency: 'KES',
         metadata: {
             name,
             phone,
-        }
+        },
     };
 
     const onSuccess = async () => {
-        setPaymentCompleted(true)//set payment completion to true
-        //console.log(paymentCompleted)
-        setIsModalOpen(false)
-        
+        setPaymentCompleted(true);
+        setIsModalOpen(false);
 
-        try {
-            const response = await fetch('http://127.0.0.1:8000/api/appointments/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('access')}`,
-                },
-                body: JSON.stringify({
-                    username: name,
-                    services: selectedServices,
-                    appointment_date: new Date().toISOString(), // automatically set current date
-                    total_amount: totalPrice,
-                }),
-            });
+    //     try {
+    //         const response = await fetch('http://127.0.0.1:8000/api/appointments/', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 'Authorization': `Bearer ${localStorage.getItem('access')}`,
+    //             },
+    //             body: JSON.stringify({
+    //                 username: username,
+    //                 services: selectedServices,
+    //                 appointment_date: new Date().toISOString(),
+    //                 total_amount: totalPrice,
+    //             }),
+    //         });
 
-            if (response.ok) {
-                console.log("Appointment successfully saved.");
-                // Handle additional actions upon success, such as redirecting to dashboard
-            } else {
-                const errorData = await response.json();
-                console.error("Error saving appointment:", errorData);
-            }
-        } catch (error) {
-            console.error("Error connecting to backend:", error);
-        }
-    
-        
-    }
+    //         if (response.ok) {
+    //             console.log("Appointment saved successfully");
+    //             navigate('/profile'); // Redirect to profile or bookings page
+    //         } else if (response.status === 401) {
+    //             console.error("Unauthorized. Please log in again.");
+    //             navigate('/login');
+    //         } else {
+    //             const errorData = await response.json();
+    //             console.error("Error saving appointment:", errorData);
+    //         }
+    //     } catch (error) {
+    //         console.error("Error connecting to backend:", error);
+    //     }
+     };
 
     const onClose = () => {
-        console.log('closed')
-        setIsModalOpen(false)
-        //window.location.href='https://calendly.com/bowana2019'
-    }
+        setIsModalOpen(false);
+        if (!user) navigate('/login'); // Redirect to login if not authenticated
+    };
 
     const initializePayment = usePaystackPayment(config);
 
     const handleProceedToPayment = () => {
-        if (selectedServices.length === 0){
-            alert ('Select a Service to Proceed')
+        if (selectedServices.length === 0) {
+            alert('Select a Service to Proceed');
         } else {
-            setIsModalOpen(true)
+            setIsModalOpen(true);
         }
-    }
+    };
 
     const handlePayNow = () => {
         if (email && name && phone) {
-            console.log('Initializing payment with config:', config);
             initializePayment(onSuccess, onClose);
         } else {
             alert('Please fill in all the details.');
         }
-    }
+    };
 
     
     return (

@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from rest_framework.response import Response
 
-
+from rest_framework.decorators import api_view
 #from .Serializers import AestheticianSerializer, ServiceSerializer, AppointmentSerializer, LoyaltyPointsSerializer
 
 from django.http import HttpResponse
@@ -11,6 +11,10 @@ from django.http import HttpResponse
 def home(request):
     return HttpResponse("Welcome to the Booking Management System!")
 
+
+@api_view(['GET'])
+def user_profile(request):
+    return Response({"username": request.user.username})
 
 """class AestheticianView(viewsets.ModelViewSet):
     serializer_class = AestheticianSerializer

@@ -26,10 +26,13 @@ const Login = () => {
             });
 
             if (response.ok) {
-                // Redirect to a protected page or dashboard after successful login
+                
                 const data = await response.json();
-                login(data)
-                navigate('/dashboard'); //dashboard
+                login({
+                    username: data.username,
+                    token: data.token,
+                });
+                navigate('/dashboard')
             } else {
                 const data = await response.json();
                 setError('Login failed: ' + (data.detail || 'Invalid credentials'));
@@ -39,15 +42,15 @@ const Login = () => {
         }
     };
 
-    const SignupButton = () => {
-    const { isLoggedIn } = useAuth();
+    // const SignupButton = () => {
+    // const { isLoggedIn } = useAuth();
 
-    return (
-        <button onClick={isLoggedIn ? goToDashboard : handleSignup}>
-            {isLoggedIn ? 'Go to Dashboard' : 'Sign Up'}
-        </button>
-    );
-};
+    // return (
+    //     <button onClick={isLoggedIn ? goToDashboard : handleSignup}>
+    //         {isLoggedIn ? 'Go to Dashboard' : 'Sign Up'}
+    //     </button>
+    // );
+
 
     return (
         <div className="flex justify-center items-center h-screen bg-gray-100">

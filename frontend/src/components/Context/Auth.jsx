@@ -1,23 +1,32 @@
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [userData, setUserData] = useState(null); // Store user data 
+    const [user, setUser] = useState(null);
 
-    const login = (data) => {
-        setIsLoggedIn(true);
-        setUserData(data);
+    useEffect(() => {
+        // Check if the user is logged in on mount
+        axios.get('/auth/users/me/')
+            .then(response => setUser(response.data))
+            .catch(() => setUser(null));
+    }, []);
+
+    const login = (token) => {
+        localStorage.setItem('authToken', token);
+        axios.defaults.headers.common['Authorization'] = `Token ${token}`;
+        setUser({ token });
     };
 
     const logout = () => {
-        setIsLoggedIn(false);
-        setUserData(null);
+        localStorage.removeItem('authToken');
+        delete axios.defaults.headers.common['Authorization'];
+        setUser(null);
     };
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, userData, login, logout }}>
+        <AuthContext.Provider value={{ user, login, logout }}>
             {children}
         </AuthContext.Provider>
     );
