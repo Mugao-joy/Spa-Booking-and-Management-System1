@@ -28,6 +28,7 @@ SECRET_KEY = 'django-insecure-1mu(w58r#8%@3#2$f*xb-o*@e(no_1-=6vbkd5l=%5fjqv65*s
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000']
 
 
 # Application definition
@@ -145,7 +146,7 @@ if not DEBUG:
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5174",
+    "http://localhost:5173",
 ]
 
 REST_FRAMEWORK = {
@@ -156,32 +157,35 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('Bearer'),
-#    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
-#     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
-#     "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+     "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
 }
 #onhold
-"""AUTH_USER_MODEL = 'bowanaApp.User'
+#AUTH_USER_MODEL = 'bowanaApp.User'
 DJOSER = { 
     "LOGIN_FIELD": "email",
-    "USER_CREATE_PASSWORD_RETYPE": True,
-    "USERNAME_CHANGED_EMAIL_CONFIRMATION": True,
-    "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
-    "SEND_CONFIRMATION_EMAIL": True,
-    "SET_USERNAME_RETYPE": True,
-    "SET_PASSWORD_RETYPE": True,
-    "USERNAME_RESET_CONFIRM_URL": "#/email/reset/confirm/{uid}/{token}",
-    "PASSWORD_RESET_CONFIRM_URL": "#/password/reset/confirm/{uid}/{token}",
-    "ACTIVATION_URL": "#/activate/{uid}/{token}",
-    "SEND_ACTIVATION_EMAIL": True,
-    
-    "SERIALIZERS": {
-        "user_create": "App.serializers.UserCreateSerializer",  
-        "user": "djoser.serializers.UserSerializer",
-        "current_user": "djoser.serializers.UserSerializer",
-        "user_delete": "djoser.serializers.UserSerializer",
+    'SERIALIZERS': {
+        'token_create': 'djoser.serializers.TokenCreateSerializer',
     },
-}"""
+    #"USER_CREATE_PASSWORD_RETYPE": True,
+    #"USERNAME_CHANGED_EMAIL_CONFIRMATION": True,
+    #"PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
+    #"SEND_CONFIRMATION_EMAIL": True,
+    #"SET_USERNAME_RETYPE": True,
+    #"SET_PASSWORD_RETYPE": True,
+    #"USERNAME_RESET_CONFIRM_URL": "#/email/reset/confirm/{uid}/{token}",
+    #"PASSWORD_RESET_CONFIRM_URL": "#/password/reset/confirm/{uid}/{token}",
+    #"ACTIVATION_URL": "#/activate/{uid}/{token}",
+    #"SEND_ACTIVATION_EMAIL": True,
+    
+    #"SERIALIZERS": {
+        #"user_create": "App.serializers.UserCreateSerializer",  
+        #"user": "djoser.serializers.UserSerializer",
+        #"current_user": "djoser.serializers.UserSerializer",
+        #"user_delete": "djoser.serializers.UserSerializer",
+    #},
+}
 
 # AUTHENTICATION_BACKENDS = (
 #     'django.contrib.auth.backends.ModelBackend',

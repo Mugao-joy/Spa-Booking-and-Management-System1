@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './Auth';
 import { FaRegCalendarCheck, FaRegCreditCard } from 'react-icons/fa';
-import { useState } from 'react';
 
 function Dashboard() {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
-
     const [activeMenu, setActiveMenu] = useState('');
 
     const handleLogout = () => {
-        logout(); // Implement your logout function in AuthContext
-        navigate('/login'); // Redirect to login page after logout
+        logout();
+        navigate('/login');
+    };
+
+    const getLoggedInUser = () => {
+        if (user) {
+            return user.email; // Display username if user is logged in
+        }
+        return 'Loading...'; // Fallback if no user is logged in
     };
 
     const renderContent = () => {
@@ -30,13 +35,13 @@ function Dashboard() {
                     <section style={styles.section}>
                         <h2>Schedule My Appointment</h2>
                         <p>Here you can schedule your appointment.</p>
-                        <iframe 
-                                src="https://calendly.com/bowana2019" 
-                                style={styles.calendlyIframe} 
-                                width="100%" 
-                                height="600px" 
-                                frameBorder="0" 
-                            />
+                        <iframe
+                            src="https://calendly.com/bowana2019"
+                            style={styles.calendlyIframe}
+                            width="100%"
+                            height="600px"
+                            frameBorder="0"
+                        />
                     </section>
                 );
             case 'makePayment':
@@ -58,24 +63,32 @@ function Dashboard() {
                 <h2>Dashboard</h2>
                 <ul style={styles.menuList}>
                     <li style={styles.menuItem}>
-                        <button onClick={() => setActiveMenu('myBookings')} style={styles.button}>My Bookings</button>
+                        <button onClick={() => setActiveMenu('myBookings')} style={styles.button}>
+                            My Bookings
+                        </button>
                     </li>
                     <div style={styles.separator}></div>
                     <li style={styles.menuItem}>
-                        <button onClick={() => setActiveMenu('scheduleAppointment')} style={styles.button}>Schedule My Appointment</button>
+                        <button onClick={() => setActiveMenu('scheduleAppointment')} style={styles.button}>
+                            Schedule My Appointment
+                        </button>
                     </li>
                     <div style={styles.separator}></div>
                     <li style={styles.menuItem}>
-                        <button onClick={() => setActiveMenu('makePayment')} style={styles.button}>Make Payment</button>
+                        <button onClick={() => setActiveMenu('makePayment')} style={styles.button}>
+                            Make Payment
+                        </button>
                     </li>
                     <div style={styles.separator}></div>
                     <li style={styles.menuItem}>
-                        <button onClick={handleLogout} style={styles.button}>Logout</button>
+                        <button onClick={handleLogout} style={styles.button}>
+                            Logout
+                        </button>
                     </li>
                 </ul>
             </div>
             <div style={styles.content}>
-                <h1>Welcome back, {user ? user.username : 'User'}!</h1>
+                <h1>Welcome back, {getLoggedInUser()}!</h1>
                 {renderContent()}
             </div>
         </div>
@@ -91,14 +104,13 @@ const styles = {
         width: '250px',
         background: '#89735c',
         padding: '20px',
-        boxShadow: '#FFFFFF',
     },
     menuList: {
         listStyleType: 'none',
         padding: 0,
     },
     menuItem: {
-        marginBottom: '10px', // Space between items
+        marginBottom: '10px',
     },
     button: {
         textDecoration: 'none',
@@ -110,12 +122,12 @@ const styles = {
         background: 'none',
         cursor: 'pointer',
         width: '100%',
-        textAlign: 'left', // Align text to the left
+        textAlign: 'left',
     },
     separator: {
         height: '1px',
         background: 'rgb(162,163,132)',
-        margin: '5px 0', // Space around the separator
+        margin: '5px 0',
     },
     content: {
         flex: 1,

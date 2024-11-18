@@ -7,50 +7,19 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
-    const { isLoggedIn, login } = useAuth()
+    const { login } = useAuth();
 
     const handleLogin = async (e) => {
         e.preventDefault();
         setError('');
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/auth/jwt/create/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: username,
-                    password: password,
-                }),
-            });
-
-            if (response.ok) {
-                
-                const data = await response.json();
-                login({
-                    username: data.username,
-                    token: data.token,
-                });
-                navigate('/dashboard')
-            } else {
-                const data = await response.json();
-                setError('Login failed: ' + (data.detail || 'Invalid credentials'));
-            }
+            await login({ username, password });
+            navigate('/dashboard'); // Redirect on successful login
         } catch (error) {
-            setError('An error occurred during login.');
+            setError(error.message || 'An error occurred during login.');
         }
     };
-
-    // const SignupButton = () => {
-    // const { isLoggedIn } = useAuth();
-
-    // return (
-    //     <button onClick={isLoggedIn ? goToDashboard : handleSignup}>
-    //         {isLoggedIn ? 'Go to Dashboard' : 'Sign Up'}
-    //     </button>
-    // );
-
 
     return (
         <div className="flex justify-center items-center h-screen bg-gray-100">

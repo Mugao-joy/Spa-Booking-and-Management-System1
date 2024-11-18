@@ -3,6 +3,7 @@ import Home from './components/Home'
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './index.css';
+import { AuthProvider } from './components/Context/Auth';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -62,9 +63,11 @@ const router = createBrowserRouter([
 function App() {
   
   return (
-    <div className='App'>
-      <RouterProvider router={router}/>
-    </div>
+    <AuthProvider>
+      <div className='App'>
+        <RouterProvider router={router}/>
+      </div>
+    </AuthProvider>
   )
 }
 

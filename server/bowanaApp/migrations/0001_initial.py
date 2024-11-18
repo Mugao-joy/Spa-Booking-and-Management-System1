@@ -12,13 +12,10 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Blogs',
+            name='Aesthetician',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=100)),
-                ('content', models.TextField()),
-                ('author', models.TextField()),
-                ('dated', models.DateTimeField(auto_now_add=True)),
+                ('name', models.CharField(max_length=100)),
             ],
         ),
     ]
