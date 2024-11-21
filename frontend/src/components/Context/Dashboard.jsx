@@ -1,23 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './Auth';
 import { FaRegCalendarCheck, FaRegCreditCard } from 'react-icons/fa';
+import axios from 'axios';
 
 function Dashboard() {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
     const [activeMenu, setActiveMenu] = useState('');
+    //const [bookings, setBookings] = useState([]);
+    //const [loading, setLoading] = useState(true);
 
+    
     const handleLogout = () => {
         logout();
-        navigate('/login');
+        navigate('/');
     };
 
     const getLoggedInUser = () => {
         if (user) {
             return user.email; // Display username if user is logged in
         }
-        return 'Loading...'; // Fallback if no user is logged in
+        //return 'Loading...'; // Fallback if no user is logged in
     };
 
     const renderContent = () => {
