@@ -164,9 +164,15 @@ SIMPLE_JWT = {
 #AUTH_USER_MODEL = 'bowanaApp.User'
 DJOSER = { 
     "LOGIN_FIELD": "email",
+    'USER_MODEL': 'auth.User',
     'SERIALIZERS': {
         'token_create': 'djoser.serializers.TokenCreateSerializer',
+        'user': 'djoser.serializers.UserSerializer',
+        'user_create': 'bowanaApp.serializers.UserCreateSerializer',
+        'current_user': 'djoser.serializers.UserSerializer',
     },
+    'USER_CREATE_PASSWORD_RETYPE': False,
+}
     #"USER_CREATE_PASSWORD_RETYPE": True,
     #"USERNAME_CHANGED_EMAIL_CONFIRMATION": True,
     #"PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
@@ -184,7 +190,7 @@ DJOSER = {
         #"current_user": "djoser.serializers.UserSerializer",
         #"user_delete": "djoser.serializers.UserSerializer",
     #},
-}
+
 
 # AUTHENTICATION_BACKENDS = (
 #     'django.contrib.auth.backends.ModelBackend',

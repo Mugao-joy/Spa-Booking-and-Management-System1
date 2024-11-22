@@ -3,8 +3,19 @@ from rest_framework import serializers
 #from djoser.serializers import UserCreateSerializer
 #from django.contrib.auth import get_user_model
 from rest_framework import serializers
+from djoser.serializers import UserCreateSerializer as BaseUserCreateSerializer
+
 
 #User = get_user_model()
+
+class UserCreateSerializer(BaseUserCreateSerializer):
+    class Meta(BaseUserCreateSerializer.Meta):
+        fields = (
+                "id",
+                "email",
+                "username",
+                "password"
+                )
 
 """class AestheticianSerializer(serializers.ModelSerializer):
     class Meta:

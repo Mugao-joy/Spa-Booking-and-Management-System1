@@ -87,7 +87,7 @@ export default function Footer() {
                 </a>
               </p>
               <p>
-                <a href='/blogs' className='text-reset'>
+                <a href='/services' className='text-reset'>
                   Blogs
                 </a>
               </p>
