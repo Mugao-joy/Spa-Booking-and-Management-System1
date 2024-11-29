@@ -25,5 +25,5 @@ Secure Payments: Integration with payment gateways for secure transactions.
   *Paystack Integration
 
 
-[view live Demo](https://vercel.com/mugao-js-projects/spa-booking-and-management-system1-2y9p)
+[view live Demo](https://spa-booking-and-management-system1-2y9p.vercel.app/)
   
