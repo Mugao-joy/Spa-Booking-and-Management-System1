@@ -26,4 +26,5 @@ Secure Payments: Integration with payment gateways for secure transactions.
 
 
 [view live Demo](https://spa-booking-and-management-system1-2y9p.vercel.app/)
+aws live deployment
   
