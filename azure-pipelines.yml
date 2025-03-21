@@ -1,0 +1,19 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: Docker@2
+    inputs:
+      command: 'login'
+      containerRegistry: 'mugaojoy'
+
+
+  - task: Docker@2
+    inputs:
+      command: 'buildAndPush'
+      repository: 'mugao-joy/spa-server'
+      dockerfile: 'server/Dockerfile'
+      tags: 'latest'
